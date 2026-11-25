@@ -11,7 +11,7 @@
 ![JavaScript](https://img.shields.io/badge/code-vanilla%20JS-F7DF1E?logo=javascript&logoColor=black)
 ![No tracking](https://img.shields.io/badge/tracking-none-0d9488)
 
-![Before and after](docs/before-after.png)
+![Before and after: promoted posts, sidebar ads, puzzles, the Premium upsell and sponsored messages are gone](docs/before-after.png)
 
 ## What it removes
 

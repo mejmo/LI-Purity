@@ -1,0 +1,114 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff;font:13px/1.4 "Segoe UI",system-ui,sans-serif;color:#1d2226;width:960px}
+.panel{margin:20px 24px;border-radius:14px;overflow:hidden;border:1px solid #dcdad5}
+.head{display:flex;align-items:center;gap:10px;padding:12px 16px;font-weight:700;font-size:16px;border-bottom:1px solid #dcdad5}
+.head .tag{font-size:12px;font-weight:600;padding:3px 10px;border-radius:12px}
+.head .note{margin-left:auto;font-weight:400;font-size:12px;color:#666}
+.before .head{background:#fff5f5}.before .tag{background:#fde2e1;color:#b42318}
+.after .head{background:#f2fbf5}.after .tag{background:#dcf4e4;color:#146c2e}
+.page{background:#f4f2ee;padding:14px;display:grid;grid-template-columns:190px 1fr 220px;gap:12px;align-items:start}
+.card{background:#fff;border:1px solid #e0dfdc;border-radius:8px;padding:12px;margin-bottom:10px;position:relative}
+.av{width:36px;height:36px;border-radius:50%;flex:none;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.av.sm{width:28px;height:28px;font-size:11px}.av.lg{width:56px;height:56px;font-size:18px;margin:0 auto 6px}
+.row{display:flex;gap:9px;align-items:center}
+.name{font-weight:600;font-size:13px}.sub{font-size:11px;color:#666}
+.text{margin:8px 0;font-size:12.5px}
+.media{height:92px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px}
+.cta{margin-top:8px;border:1px solid #0a66c2;color:#0a66c2;border-radius:14px;text-align:center;padding:3px;font-weight:600;font-size:12px}
+.acts{display:flex;justify-content:space-around;margin-top:8px;padding-top:6px;border-top:1px solid #eee;color:#666;font-size:11.5px}
+.menu div{padding:5px 0;font-size:12px;font-weight:600}
+.small{font-size:11px;color:#666}
+.game{display:flex;gap:8px;align-items:center;padding:5px 0}.sq{width:24px;height:24px;border-radius:5px;flex:none}
+.center{text-align:center}
+/* removed items */
+.x{outline:2.5px solid #e5484d;outline-offset:-1px;background:#fff}
+.x::after{content:"";position:absolute;inset:0;background:rgba(229,72,77,.10);border-radius:8px;pointer-events:none}
+.chip{position:absolute;top:-9px;right:8px;z-index:2;background:#e5484d;color:#fff;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.2px}
+.lbl{color:#666;font-size:11px}
+.before .lbl.hl{color:#b42318;font-weight:700}
+/* messaging strip */
+.msg{background:#f4f2ee;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.inbox{background:#fff;border:1px solid #e0dfdc;border-radius:8px;overflow:visible}
+.inbox h4{margin:0;padding:9px 12px;font-size:13px;border-bottom:1px solid #eee}
+.conv{display:flex;gap:9px;padding:9px 12px;border-bottom:1px solid #f0f0f0;position:relative;align-items:center}
+.conv:last-child{border-bottom:0}
+.pill{font-weight:700}
+.conv.x{border-radius:0}
+.conv.x::after{border-radius:0}
+.cap{font-size:12px;font-weight:700;margin-bottom:6px;color:#444}
+</style></head><body>
+
+<!-- BEFORE -->
+<div class="panel before">
+  <div class="head">Before <span class="tag">plain LinkedIn</span><span class="note">red = removed by LI Purity</span></div>
+  <div class="page">
+    <div>
+      <div class="card center"><div class="av lg" style="background:#5b7db1">AM</div><div class="name">Alex Morgan</div><div class="sub">Software Engineer</div></div>
+      <div class="card x menu"><span class="chip">HIDDEN</span>
+        <div>★ Your Premium features</div><div>◎ Advertise on LinkedIn</div><div class="small" style="font-weight:400">Grow your business faster</div><div>★ Try Premium Page</div></div>
+    </div>
+    <div>
+      <div class="card"><div class="row"><div class="av" style="background:#8e6bbf">EP</div><div><div class="name">Elena Park</div><div class="sub">Product Designer · 2h</div></div></div>
+        <div class="text">Shipped our new onboarding flow today. Huge thanks to the team for all the late-night reviews!</div>
+        <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>↗ Share</span></div></div>
+      <div class="card x"><span class="chip">HIDDEN</span><div class="row"><div class="av" style="background:#0f766e">CN</div><div><div class="name">CloudNimbus</div><div class="lbl hl">Promoted</div></div></div>
+        <div class="text">Cut your cloud bill by 40% this quarter. Get the free guide →</div>
+        <div class="media" style="background:linear-gradient(135deg,#14b8a6,#0e7490)">Download the eBook</div><div class="cta">Learn more</div></div>
+      <div class="card"><div class="row"><div class="av" style="background:#c2410c">TW</div><div><div class="name">Tomas Weber</div><div class="sub">Engineering Manager · 5h</div></div></div>
+        <div class="text">We're hiring two backend engineers in Berlin. DM me if you're interested.</div>
+        <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>↗ Share</span></div></div>
+    </div>
+    <div>
+      <div class="card x"><span class="chip">HIDDEN</span><div class="name" style="margin-bottom:4px">Today’s puzzles</div>
+        <div class="game"><div class="sq" style="background:#f59e0b"></div><div><b>Puzzle #616</b><div class="small">9 connections played</div></div></div>
+        <div class="game"><div class="sq" style="background:#6366f1"></div><div><b>Grid #312</b><div class="small">4 connections played</div></div></div></div>
+      <div class="card"><div class="name" style="margin-bottom:6px">Add to your feed</div>
+        <div class="row" style="margin-bottom:6px"><div class="av sm" style="background:#64748b">PS</div><div><div class="name" style="font-size:12px">Priya Shah</div><div class="sub">CTO at Lumen</div></div></div>
+        <div class="row"><div class="av sm" style="background:#a16207">JN</div><div><div class="name" style="font-size:12px">Jan Novak</div><div class="sub">Founder</div></div></div></div>
+      <div class="card x"><span class="chip">HIDDEN</span><div class="row" style="justify-content:space-between"><div class="av" style="background:#b91c1c;border-radius:6px">NW</div><span class="lbl hl">Promoted</span></div>
+        <div class="name" style="margin-top:6px">Northwind Oils</div><div class="text" style="margin:4px 0">Alex, unlock expertise with Northwind!</div><div class="cta">Follow</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- AFTER -->
+<div class="panel after">
+  <div class="head">After <span class="tag">with LI Purity</span><span class="note">just your network</span></div>
+  <div class="page">
+    <div>
+      <div class="card center"><div class="av lg" style="background:#5b7db1">AM</div><div class="name">Alex Morgan</div><div class="sub">Software Engineer</div></div>
+    </div>
+    <div>
+      <div class="card"><div class="row"><div class="av" style="background:#8e6bbf">EP</div><div><div class="name">Elena Park</div><div class="sub">Product Designer · 2h</div></div></div>
+        <div class="text">Shipped our new onboarding flow today. Huge thanks to the team for all the late-night reviews!</div>
+        <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>↗ Share</span></div></div>
+      <div class="card"><div class="row"><div class="av" style="background:#c2410c">TW</div><div><div class="name">Tomas Weber</div><div class="sub">Engineering Manager · 5h</div></div></div>
+        <div class="text">We're hiring two backend engineers in Berlin. DM me if you're interested.</div>
+        <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>↗ Share</span></div></div>
+    </div>
+    <div>
+      <div class="card"><div class="name" style="margin-bottom:6px">Add to your feed</div>
+        <div class="row" style="margin-bottom:6px"><div class="av sm" style="background:#64748b">PS</div><div><div class="name" style="font-size:12px">Priya Shah</div><div class="sub">CTO at Lumen</div></div></div>
+        <div class="row"><div class="av sm" style="background:#a16207">JN</div><div><div class="name" style="font-size:12px">Jan Novak</div><div class="sub">Founder</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MESSAGING -->
+<div class="panel">
+  <div class="head" style="background:#f8f8f6">Messaging <span class="note">sponsored messages are deleted from your inbox; InMail and chats stay</span></div>
+  <div class="msg">
+    <div><div class="cap">Before</div><div class="inbox"><h4>Messages</h4>
+      <div class="conv x"><span class="chip" style="top:6px">DELETED</span><div class="av sm" style="background:#334155">MO</div><div><div class="name">Mark Olsen</div><div class="small"><span class="pill" style="color:#b42318">Sponsored</span> • [eBook] Strategies for…</div></div></div>
+      <div class="conv"><div class="av sm" style="background:#8e6bbf">EP</div><div><div class="name">Elena Park</div><div class="small">Thanks, see you on Friday!</div></div></div>
+      <div class="conv"><div class="av sm" style="background:#0369a1">LS</div><div><div class="name">Lucas Smith</div><div class="small"><span class="pill">InMail</span> • Senior Backend Developer</div></div></div>
+    </div></div>
+    <div><div class="cap">After</div><div class="inbox"><h4>Messages</h4>
+      <div class="conv"><div class="av sm" style="background:#8e6bbf">EP</div><div><div class="name">Elena Park</div><div class="small">Thanks, see you on Friday!</div></div></div>
+      <div class="conv"><div class="av sm" style="background:#0369a1">LS</div><div><div class="name">Lucas Smith</div><div class="small"><span class="pill">InMail</span> • Senior Backend Developer</div></div></div>
+    </div></div>
+  </div>
+</div>
+</body></html>
