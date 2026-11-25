@@ -1,0 +1,37 @@
+/* Posts removed by LI Purity. Kept in the DOM (LinkedIn's virtual scroller
+   gets confused if we delete nodes), just never rendered. */
+[data-lip-hidden] {
+  display: none !important;
+}
+
+/* Invisible and zero-height, but still rendered, so the page's own menus
+   inside it keep working (used for sponsored conversations being deleted). */
+[data-lip-collapsed] {
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* While a sponsored conversation is being deleted through LinkedIn's own menu
+   and confirm dialog, keep those invisible so nothing flashes on screen. */
+html[data-lip-busy] .msg-cross-pillar-modal-delete-convo,
+html[data-lip-busy] .artdeco-modal-overlay:has(.msg-cross-pillar-modal-delete-convo) {
+  opacity: 0 !important;
+}
+
+/* An open sponsored message (LinkedIn calls them "spinmail"): blank it out. */
+.msg-convo-wrapper:has(.msg-spinmail-thread-presenter) > * {
+  visibility: hidden !important;
+}
+
+/* Debug mode: show what would be hidden instead of hiding it. */
+html[data-lip-debug] [data-lip-hidden] {
+  display: block !important;
+  outline: 3px dashed #e11d48 !important;
+  opacity: 0.4;
+}

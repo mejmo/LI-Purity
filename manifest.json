@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "LI Purity",
+  "version": "0.2.0",
+  "description": "Making LinkedIn browsing great again. Removes Promoted posts from the feed.",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "LI Purity",
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

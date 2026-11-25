@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LI Purity</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>LI Purity</h1>
+    <span class="sub">Promoted posts &amp; ads blocked</span>
+  </header>
+
+  <section class="hero">
+    <div class="big" id="total">0</div>
+    <div class="label">all time <span id="since"></span></div>
+  </section>
+
+  <section class="grid">
+    <div class="stat"><div class="num" id="tab">–</div><div class="label">this tab</div></div>
+    <div class="stat"><div class="num" id="today">0</div><div class="label">today</div></div>
+    <div class="stat"><div class="num" id="week">0</div><div class="label">last 7 days</div></div>
+  </section>
+
+  <section>
+    <div class="chart" id="chart" aria-label="Blocked per day, last 7 days"></div>
+  </section>
+
+  <footer>
+    <button id="reset" type="button">Reset stats</button>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
