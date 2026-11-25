@@ -1,0 +1,98 @@
+name: Release
+
+# Push a tag that matches manifest.json's version, e.g.:
+#   git tag v0.3.0 && git push origin v0.3.0
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      zip: ${{ steps.pkg.outputs.zip }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - name: Check (tag must match manifest version)
+        run: node scripts/check.js "$GITHUB_REF_NAME"
+      - run: npm test
+
+      - name: Build extension ZIP
+        id: pkg
+        run: echo "zip=$(bash scripts/package.sh)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: li-purity-release
+          path: ${{ steps.pkg.outputs.zip }}
+
+  github-release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: li-purity-release
+          path: dist
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/*.zip --title "LI Purity $GITHUB_REF_NAME" --generate-notes
+
+  # Optional: upload and publish to the Chrome Web Store.
+  # Runs only when the repository variable CWS_EXTENSION_ID is set, plus the
+  # secrets CWS_CLIENT_ID, CWS_CLIENT_SECRET and CWS_REFRESH_TOKEN.
+  # The item must already exist (first upload is manual in the dashboard);
+  # its visibility (e.g. Unlisted) is kept as set there.
+  chrome-web-store:
+    needs: build
+    if: vars.CWS_EXTENSION_ID != ''
+    runs-on: ubuntu-latest
+    environment: chrome-web-store
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: li-purity-release
+          path: dist
+
+      - name: Upload and publish
+        env:
+          EXTENSION_ID: ${{ vars.CWS_EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          zip=$(ls dist/*.zip)
+
+          token=$(curl -fsS https://oauth2.googleapis.com/token \
+            --data-urlencode "client_id=$CLIENT_ID" \
+            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "refresh_token=$REFRESH_TOKEN" \
+            --data-urlencode "grant_type=refresh_token" | jq -r .access_token)
+
+          echo "Uploading $zip"
+          upload=$(curl -fsS -X PUT \
+            -H "Authorization: Bearer $token" -H "x-goog-api-version: 2" \
+            -T "$zip" \
+            "https://www.googleapis.com/upload/chromewebstore/v1.1/items/$EXTENSION_ID?uploadType=media")
+          echo "$upload"
+          [ "$(echo "$upload" | jq -r .uploadState)" = "SUCCESS" ] || { echo "::error::Upload failed"; exit 1; }
+
+          echo "Submitting for review"
+          publish=$(curl -fsS -X POST \
+            -H "Authorization: Bearer $token" -H "x-goog-api-version: 2" -H "Content-Length: 0" \
+            "https://www.googleapis.com/chromewebstore/v1.1/items/$EXTENSION_ID/publish")
+          echo "$publish"
+          echo "$publish" | jq -e '.status | index("OK")' > /dev/null || { echo "::error::Publish failed"; exit 1; }

@@ -1,0 +1,13 @@
+{
+  "name": "li-purity",
+  "private": true,
+  "description": "Chrome extension that removes ads and noise from LinkedIn.",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "check": "node scripts/check.js",
+    "package": "node scripts/check.js && bash scripts/package.sh"
+  },
+  "devDependencies": {
+    "jsdom": "24.1.3"
+  }
+}

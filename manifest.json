@@ -1,14 +1,24 @@
 {
   "manifest_version": 3,
   "name": "LI Purity",
-  "version": "0.2.0",
-  "description": "Making LinkedIn browsing great again. Removes Promoted posts from the feed.",
+  "version": "0.3.0",
+  "description": "Cleaner LinkedIn: removes promoted posts, sidebar ads and upsells, and deletes sponsored messages from your inbox.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "permissions": ["storage"],
   "background": {
     "service_worker": "src/background.js"
   },
   "action": {
     "default_title": "LI Purity",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    },
     "default_popup": "src/popup.html"
   },
   "content_scripts": [
